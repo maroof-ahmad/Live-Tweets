@@ -1,0 +1,27 @@
+{
+  "name": "realtime-twitterstream",
+  "version": "1.0.0",
+  "description": "A real time twitter stream App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maroof-ahmad/RealTime-TwitterStream.git"
+  },
+  "author": "Maroof Ahmad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maroof-ahmad/RealTime-TwitterStream/issues"
+  },
+  "homepage": "https://github.com/maroof-ahmad/RealTime-TwitterStream#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.5.8",
+    "node-jsx": "^0.13.3",
+    "ntwitter": "^0.5.0",
+    "react": "^15.3.0",
+    "socket.io": "^1.4.8"
+  }
+}
