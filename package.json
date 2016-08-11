@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/maroof-ahmad/RealTime-TwitterStream#readme",
   "dependencies": {
+    "ejs": "^2.5.1",
     "express": "^4.14.0",
     "mongoose": "^4.5.8",
-    "twitter": "^0.5.0",
-    "socket.io": "^1.4.8"
+    "nodemon": "^1.10.0",
+    "socket.io": "^1.4.8",
+    "twitter": "^1.4.0"
   }
 }

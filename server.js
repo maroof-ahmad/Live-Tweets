@@ -1,34 +1,30 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
 var http = require('http');
 var mongoose = require('mongoose');
-var twitter = require('ntwitter');
-var routes = require('./routes');
-var config = require('./config');
+var twitter = require('twitter');
+var routes = require('./routes/routes.js');
 var io = require('socket.io');
-var streamHandler = require('./utils/streamHandler');
+var streamHandler = require('./utils/streamHandler.js');
+var config = require('./config/config.js')
 
 //express instance and setting port variable
-var app = expres();
+var app = express();
 var port = process.env.PORT || 8080;
 
-//set handlebars as the templating engine
-app.engine('handlebars', exphbs({defaultlayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-app.disable('etag');
+//set ejs as the templating engine
+app.set('view engine', 'ejs');
 
 //connection to mongoose
 mongoose.connect('mongodb://localhost/react-tweets');
 
 //new twitter instance
-var twit = new twitter(config.twitter);
+var twitter = new twitter(config.twitter);
 
 //index route
 app.get('/', routes.index);
 
 //page routes
-app.get('/page/:page/:skip', routes.page);
+// app.get('/page/:page/:skip', routes.page);
 
 //set /public as static directory
 app.use('/', express.static(__dirname+"/public/"));
@@ -39,9 +35,12 @@ var server = http.createServer(app).listen(port, function(){
 });
 
 //socketio
-io.listen(server);
+var io = io.listen(server);
 
 //setting a stream listener for tweets
-twit.stream('statuses/filter',{ track: 'scotch_io, #scotchio'},function(stream){
-  streamhandler(stream,io);
-})
+twitter.stream('statuses/filter',{ track: 'twitter'},function(stream){
+  streamHandler(stream,io);
+  stream.on('error', function(error) {
+    throw error;
+  });
+});
