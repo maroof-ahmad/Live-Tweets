@@ -22,6 +22,7 @@ var twitter = new twitter(config.twitter);
 
 //index route
 app.get('/', routes.index);
+app.get('/initialstate', routes.alltweets);
 
 //page routes
 // app.get('/page/:page/:skip', routes.page);
@@ -33,12 +34,11 @@ app.use('/', express.static(__dirname+"/public/"));
 var server = http.createServer(app).listen(port, function(){
   console.log("magic happens on port " + port);
 });
-
 //socketio
 var io = io.listen(server);
 
 //setting a stream listener for tweets
-twitter.stream('statuses/filter',{ track: 'twitter'},function(stream){
+twitter.stream('statuses/filter',{ track: 'javascript'},function(stream){
   streamHandler(stream,io);
   stream.on('error', function(error) {
     throw error;
